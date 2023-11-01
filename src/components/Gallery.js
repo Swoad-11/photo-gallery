@@ -16,8 +16,10 @@ const Gallery = ({ images }) => {
 
   const deleteSelectedImages = () => {
     const updatedImages = currentImages.filter(
-      (image) => !selectedImages.includes(image.id) && image.id !== featureImage
+      (image) => !selectedImages.includes(image?.id)
     );
+    console.log(updatedImages);
+    //update image list
     setCurrentImages(updatedImages);
     setSelectedImages([]);
   };
@@ -63,9 +65,11 @@ const Gallery = ({ images }) => {
           </span>
         </div>
       </div>
+      {/* Heading part */}
 
+      {/* Gallery part */}
       <div className="grid grid-cols-5 gap-6 p-8">
-        {images.map((image, index) => (
+        {currentImages.map((image, index) => (
           <div
             key={image.id}
             className={`relative rounded-lg cursor-pointer ${
@@ -98,6 +102,7 @@ const Gallery = ({ images }) => {
           </div>
         ))}
       </div>
+      {/* Gallery part */}
     </div>
   );
 };
