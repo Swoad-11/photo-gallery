@@ -29,7 +29,7 @@ function App() {
   ];
 
   return (
-    <div>
+    <div className="bg-white m-4 rounded-md">
       <Gallery images={images} />
     </div>
   );
