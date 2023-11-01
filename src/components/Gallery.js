@@ -70,27 +70,34 @@ const Gallery = ({ images }) => {
   return (
     <div>
       {/* Heading part */}
-      <div className="flex justify-between items-center p-4 mb-2 border-b border-gray-300">
-        <div className="px-6">
-          <input
-            type="checkbox"
-            checked={selectedImages.length}
-            onChange={() => setSelectedImages([])} // Uncheck when clicked
-          />
-          <span className="font-semibold px-2 py-4">
-            {selectedImages.length}{" "}
-            {selectedImages.length === 1 ? "File Selected" : "Files Selected"}
+      <div className="flex justify-between items-center p-2 mb-2 border-b border-gray-300">
+        <div className="flex items-baseline px-6">
+          {selectedImages.length > 0 && (
+            <input
+              type="checkbox"
+              checked={selectedImages.length > 0}
+              onChange={() => setSelectedImages([])} // Uncheck when clicked
+            />
+          )}
+          <span className="font-semibold text-xl px-2 py-4">
+            {selectedImages.length === 0
+              ? "Gallery"
+              : selectedImages.length === 1
+              ? "1 File Selected"
+              : `${selectedImages.length} Files Selected`}
           </span>
         </div>
-        <div>
-          <span
-            onClick={deleteSelectedImages}
-            className="text-red-600 px-6 py-4 font-semibold cursor-pointer"
-            disabled={selectedImages.length === 0}
-          >
-            Delete Files
-          </span>
-        </div>
+        {selectedImages.length > 0 && (
+          <div>
+            <span
+              onClick={deleteSelectedImages}
+              className="text-red-600 px-6 py-4 font-semibold cursor-pointer 
+      hover:underline hover:underline-offset-4"
+            >
+              Delete Files
+            </span>
+          </div>
+        )}
       </div>
       {/* Heading part */}
 
