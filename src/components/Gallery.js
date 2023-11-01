@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import ImageGallery from "./ImageGallery";
 
 const Gallery = ({ images }) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [currentImages, setCurrentImages] = useState(images);
   const [featureImage, setFeatureImage] = useState(images[0].id);
+  const [draggedImage, setDraggedImage] = useState(null);
 
   const toggleSelect = (imageId) => {
     if (selectedImages.includes(imageId)) {
@@ -18,26 +19,31 @@ const Gallery = ({ images }) => {
     const updatedImages = currentImages.filter(
       (image) => !selectedImages.includes(image?.id)
     );
-    console.log(updatedImages);
-    //update image list
+    // Update image list
     setCurrentImages(updatedImages);
     setSelectedImages([]);
   };
 
-  const reorderImages = (result) => {
-    if (!result.destination) {
-      return;
-    }
-
-    const updatedImages = [...currentImages];
-    const [reorderedImage] = updatedImages.splice(result.source.index, 1);
-    updatedImages.splice(result.destination.index, 0, reorderedImage);
-
-    setCurrentImages(updatedImages);
-  };
-
   const setFeatureImageById = (imageId) => {
     setFeatureImage(imageId);
+  };
+
+  const handleDragStart = (event, image) => {
+    setDraggedImage(image);
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/html", event.target.parentNode);
+  };
+
+  const handleDragOver = (index) => {
+    const draggedOverImage = currentImages[index];
+    if (draggedImage === draggedOverImage) return;
+    let newImagesData = currentImages.filter((img) => img !== draggedImage);
+    newImagesData.splice(index, 0, draggedImage);
+    setCurrentImages(newImagesData);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedImage(null);
   };
 
   return (
@@ -68,40 +74,19 @@ const Gallery = ({ images }) => {
       {/* Heading part */}
 
       {/* Gallery part */}
-      <div className="grid grid-cols-5 gap-6 p-8">
-        {currentImages.map((image, index) => (
-          <div
-            key={image.id}
-            className={`relative rounded-lg cursor-pointer ${
-              index === 0 ? "col-span-2 row-span-2" : ""
-            }`}
-          >
-            <div
-              onClick={() => setFeatureImageById(image.id)}
-              style={{
-                width: "100%",
-                height: "auto",
-              }}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-auto rounded-lg border border-gray-300"
-              />
-              <div
-                className="absolute inset-0 h-full w-full overflow-hidden bg-slate-400
-               bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-60"
-              ></div>
-              <input
-                type="checkbox"
-                checked={selectedImages.includes(image.id)}
-                onChange={() => toggleSelect(image.id)}
-                className="absolute top-2 right-2"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+      <ImageGallery
+        images={images}
+        currentImages={currentImages}
+        selectedImages={selectedImages}
+        setSelectedImages={setSelectedImages}
+        featureImage={featureImage}
+        setFeatureImage={setFeatureImage}
+        deleteSelectedImages={deleteSelectedImages}
+        handleDragStart={handleDragStart}
+        handleDragOver={handleDragOver}
+        handleDragEnd={handleDragEnd}
+        toggleSelect={toggleSelect}
+      />
       {/* Gallery part */}
     </div>
   );
