@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import ImageGallery from "./ImageGallery";
 
 const Gallery = ({ images }) => {
+  /*  State variables for managing selected images, 
+  current images, feature image, and the image being dragged  */
   const [selectedImages, setSelectedImages] = useState([]);
   const [currentImages, setCurrentImages] = useState(images);
   const [featureImage, setFeatureImage] = useState(images[0].id);
   const [draggedImage, setDraggedImage] = useState(null);
 
+  // Function to toggle the selection of an image by its ID
   const toggleSelect = (imageId) => {
     if (selectedImages.includes(imageId)) {
       setSelectedImages(selectedImages.filter((id) => id !== imageId));
@@ -28,12 +31,14 @@ const Gallery = ({ images }) => {
     setFeatureImage(imageId);
   };
 
+  // Function to handle the start of dragging an image
   const handleDragStart = (event, image) => {
     setDraggedImage(image);
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/html", event.target.parentNode);
   };
 
+  // Function to handle dragging over a specific index in the gallery
   const handleDragOver = (index) => {
     const draggedOverImage = currentImages[index];
     if (draggedImage === draggedOverImage) return;
@@ -42,8 +47,24 @@ const Gallery = ({ images }) => {
     setCurrentImages(newImagesData);
   };
 
+  // Function to handle the end of dragging an image
   const handleDragEnd = () => {
     setDraggedImage(null);
+  };
+
+  const handleImageUpload = (event) => {
+    const files = event.target.files;
+    const newImages = Array.from(files).map((file) => {
+      const id = Math.random().toString(36).substr(2, 9); // Generate a unique id for the new image
+      return {
+        id,
+        src: URL.createObjectURL(file), // Create a preview URL for the image
+        alt: file.name,
+      };
+    });
+
+    // Add the new images to the currentImages state
+    setCurrentImages([...currentImages, ...newImages]);
   };
 
   return (
@@ -86,6 +107,7 @@ const Gallery = ({ images }) => {
         handleDragOver={handleDragOver}
         handleDragEnd={handleDragEnd}
         toggleSelect={toggleSelect}
+        handleImageUpload={handleImageUpload}
       />
       {/* Gallery part */}
     </div>

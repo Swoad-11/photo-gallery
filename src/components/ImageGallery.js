@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import AddImages from "./AddImages";
 
 const ImageGallery = ({
-  images,
   currentImages,
   selectedImages,
-  setSelectedImages,
-  featureImage,
   setFeatureImage,
-  deleteSelectedImages,
+  handleImageUpload,
   handleDragStart,
   handleDragOver,
   handleDragEnd,
@@ -51,6 +49,7 @@ const ImageGallery = ({
           </div>
         </div>
       ))}
+      <AddImages handleImageUpload={handleImageUpload} />
     </div>
   );
 };
