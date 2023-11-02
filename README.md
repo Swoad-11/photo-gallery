@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+## Live Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Live Site](https://photo11gallery.netlify.app/).
 
-## Available Scripts
+### Gallery Layout:
 
-In the project directory, you can run:
+A grid layout for the image gallery has been implemented.
+The gallery displays images with one feature image larger than the others, providing a visually appealing arrangement.
 
-### `npm start`
+### Sorting:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Users can easily reorder the images within the gallery.
+The implementation includes intuitive drag-and-drop functionality or another user-friendly method for reordering images.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Deleting Multiple Images:
 
-### `npm test`
+Users can select multiple images for deletion, simplifying the management of their image collection.
+A clear visual indication is provided to identify the selected images, ensuring that users can easily delete the intended photos.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Setting Feature Image:
 
-### `npm run build`
+Users have the ability to set a feature image through sorting.
+The first image (from left to right) is treated as the featured image by default.
+The feature image is designed to be visually distinct from the other images, making it stand out within the gallery.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### User Experience:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The implementation focuses on delivering a smooth and responsive user experience.
+Transitions or animations have been incorporated to enhance the overall look and feel of the gallery, providing a polished and engaging user interface.
