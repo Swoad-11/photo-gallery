@@ -36,6 +36,7 @@ const Gallery = ({ images }) => {
     setDraggedImage(image);
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/html", event.target.parentNode);
+    event.target.classList.add("dragged-image");
   };
 
   // Function to handle dragging over a specific index in the gallery
@@ -49,6 +50,9 @@ const Gallery = ({ images }) => {
 
   // Function to handle the end of dragging an image
   const handleDragEnd = () => {
+    if (draggedImage) {
+      draggedImage.classList?.remove("dragged-image"); // Remove the "dragged-image" class
+    }
     setDraggedImage(null);
   };
 
@@ -70,8 +74,8 @@ const Gallery = ({ images }) => {
   return (
     <div>
       {/* Heading part */}
-      <div className="flex justify-between items-center p-2 mb-2 border-b border-gray-300">
-        <div className="flex items-baseline px-6">
+      <div className="flex flex-col sm:flex-row justify-between items-center p-2 mb-2 border-b border-gray-300">
+        <div className="flex items-baseline sm:px-6">
           {selectedImages.length > 0 && (
             <input
               type="checkbox"
@@ -88,11 +92,10 @@ const Gallery = ({ images }) => {
           </span>
         </div>
         {selectedImages.length > 0 && (
-          <div>
+          <div className="mt-2 sm:mt-0">
             <span
               onClick={deleteSelectedImages}
-              className="text-red-600 px-6 py-4 font-semibold cursor-pointer 
-      hover:underline hover:underline-offset-4"
+              className="text-red-600 px-6 py-4 font-semibold cursor-pointer hover:underline hover:underline-offset-4"
             >
               Delete Files
             </span>
@@ -115,6 +118,7 @@ const Gallery = ({ images }) => {
         handleDragEnd={handleDragEnd}
         toggleSelect={toggleSelect}
         handleImageUpload={handleImageUpload}
+        draggedImage={draggedImage}
       />
       {/* Gallery part */}
     </div>

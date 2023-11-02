@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dragged-image {
+  transform: scale(1.05); /* Slightly scale up the image */
+  transition: transform 0.3s ease-in-out; /* Apply a smooth scaling animation */
+  z-index: 1; /* Bring the dragged image to the top layer */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0);
+}
